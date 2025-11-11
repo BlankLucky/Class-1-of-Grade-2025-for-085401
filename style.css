@@ -1,0 +1,117 @@
+/* 页面样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9; /* 更清爽的背景色 */
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* 更深的标题颜色，增加对比度 */
+}
+
+/* 地图容器 */
+#container {
+    width: 100%;
+    height: 600px;
+    border-radius: 8px; /* 圆角效果 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影，增加立体感 */
+}
+
+/* 输入框容器 */
+.input-container-fixed {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* 透明度降低，增强可见性 */
+    padding: 15px;
+    border-radius: 10px; /* 更加圆润的角 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* 增大阴影，突显容器 */
+    width: 280px; /* 减小宽度，使其更加紧凑 */
+    max-width: 100%;
+    font-size: 14px;
+}
+
+/* 每行输入框样式 */
+.input-container-fixed .input-row {
+    margin-bottom: 18px;
+}
+
+/* 标签样式 */
+.input-container-fixed label {
+    display: block;
+    font-size: 13px; /* 微调字体大小 */
+    margin-bottom: 5px;
+    color: #555; /* 更柔和的标签颜色 */
+}
+
+/* 输入框样式 */
+.input-container-fixed input,
+.input-container-fixed textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px; /* 适当减小字体大小 */
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* 焦点样式 */
+.input-container-fixed input:focus,
+.input-container-fixed textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* 提交按钮样式 */
+.input-container-fixed button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 15px; /* 调整按钮字体 */
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+/* 按钮悬浮时的颜色 */
+.input-container-fixed button:hover {
+    background-color: #45a049;
+}
+
+/* 成功消息 */
+#message {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* 右下角下载按钮 */
+.download-button-container {
+    position: fixed;
+    right: 20px;
+    bottom: 80px; /* 调整下载按钮位置，避免遮挡表单 */
+    z-index: 10;
+}
+
+.download-button-container button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+/* 下载按钮悬浮时 */
+.download-button-container button:hover {
+    background-color: #45a049;
+}
