@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"融数字之翼，传红色之魂"特色主题团日活动--电子信息25-1（硕）</title>
+    <style>
+        /* 页面样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        #container {
+            width: 100%;
+            height: 700px;
+        }
+
+        /* 固定位置的左下角输入框 */
+        .input-container-fixed {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 180px;
+            max-width: 100%;
+        }
+
+        .input-container-fixed .input-row {
+            margin-bottom: 5px; /* 缩小每个框之间的间距 */
+        }
+
+        .input-container-fixed label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .input-container-fixed input,
+        .input-container-fixed textarea {
+            width: 100%;
+            padding: 8px;
+            padding-left: 1px; /* 调整左边距 */
+            margin-left: 0; /* 确保没有外边距 */
+            font-size: 14px;
+            margin-bottom: 5px; /* 减少底部空白 */
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .input-container-fixed textarea {
+            height: 60px;
+            resize: none;
+        }
+
+        .input-container-fixed button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .input-container-fixed button:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* 上传图片/视频的显示样式 */
+        #uploadedMediaContainer {
+            margin-top: 10px; /* 缩小上传框与下方元素的间距 */
+            max-width: 100%;
+        }
+
+        #uploadedMediaContainer img,
+        #uploadedMediaContainer video {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            margin: 10px 0;
+        }
+
+        /* 右下角的下载按钮 */
+        .download-button-container {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .download-button-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .download-button-container button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=YOUR_AMAP_KEY"></script> <!-- 替换为你的高德API Key -->
+</head>
+<body>
+    <h1>"融数字之翼，传红色之魂"特色主题团日活动--电子信息25-1（硕）</h1>
+    <div id="container"></div>
+
+    <!-- 固定在左下角的标注输入框 -->
+    <div class="input-container-fixed">
+        <div class="input-row">
+            <label for="markerName">打卡人:</label>
+            <input type="text" id="markerName" placeholder="请输入标注人名称" required>
+        </div>
+
+        <div class="input-row">
+            <label for="markerDescription">个人感悟:</label>
+            <textarea id="markerDescription" placeholder="请输入标注描述" required></textarea>
+        </div>
+
+        <div class="input-row">
+            <label for="uploadMedia">上传图片/视频:</label>
+            <input type="file" id="uploadMedia" accept="image/*,video/*" onchange="previewMedia()" />
+        </div>
+
+        <button onclick="addMarker()">打卡</button>
+        <p id="message"></p>
+
+        <!-- 显示上传的图片/视频 -->
+        <div id="uploadedMediaContainer"></div>
+    </div>
+
+    <!-- 右下角下载标注数据按钮 -->
+    <div class="download-button-container">
+        <button onclick="downloadMarkers()">下载打卡数据</button>
+    </div>
+
+    <script src="map.js"></script>
+    <script>
+        // 预览上传的媒体文件
+        function previewMedia() {
+            const file = document.getElementById('uploadMedia').files[0];
+            const container = document.getElementById('uploadedMediaContainer');
+            container.innerHTML = '';  // 清除之前的媒体文件
+
+            if (file) {
+                const mediaElement = file.type.startsWith('image') ? document.createElement('img') : document.createElement('video');
+                mediaElement.src = URL.createObjectURL(file);
+                mediaElement.controls = true;
+                container.appendChild(mediaElement);
+            }
+        }
+    </script>
+</body>
+</html>
