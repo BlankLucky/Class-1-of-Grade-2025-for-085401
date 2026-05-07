@@ -3,7 +3,7 @@ window.RED_MAP_CONFIG = {
   seedCheckinsUrl: "data/checkins.json",
   qrApiTemplate: "https://api.qrserver.com/v1/create-qr-code/?size=280x280&data={url}",
   deployment: {
-    forceBaseUrl: ""
+    forceBaseUrl: "https://blanklucky.github.io/Class-1-of-Grade-2025-for-085401/"
   },
   amap: {
     key: "",
