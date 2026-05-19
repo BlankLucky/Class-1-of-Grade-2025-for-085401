@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>乌鲁木齐红色历史地图打卡平台</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="cover-page">
+    <main class="poster-shell">
+        <div class="poster-map-lines" aria-hidden="true"></div>
+        <div class="poster-cityline" aria-hidden="true"></div>
+        <p class="poster-topline">电子信息2025级1班研究生团支部</p>
+        <p class="poster-side-copy">线上学习 · 线下走访 · 现场记录</p>
+        <div class="poster-badge">主题团日</div>
+
+        <section class="poster-hero">
+            <p class="poster-kicker">红色场馆导览与现场记录</p>
+            <h1 class="poster-title poster-title-slogan">
+                <span>融数字之翼，</span>
+                <span>传红色之魂。</span>
+            </h1>
+            <p class="poster-subtitle">
+                <span class="poster-subtitle-lead">乌鲁木齐红色历史地图打卡平台</span>
+                <span>支持扫码直达、场馆检索、距离提示、导航前往与到点记录。</span>
+            </p>
+            <a id="enterMapButton" class="poster-cta" href="map.html">进入红色地图</a>
+            <p id="posterDeployHint" class="poster-hint">扫码进入地图页面。</p>
+        </section>
+
+        <section class="qr-card">
+            <div class="qr-frame">
+                <img id="qrImage" alt="地图访问二维码">
+                <p id="qrPlaceholder" class="qr-placeholder" hidden>部署到公网地址后自动生成二维码</p>
+            </div>
+            <p class="qr-caption">扫码进入活动地图</p>
+            <button id="copyLinkButton" class="secondary-button" type="button">复制访问链接</button>
+            <p id="posterUrl" class="poster-url"></p>
+            <p class="qr-note">可通过下方链接直接访问地图页面。</p>
+        </section>
+    </main>
+
+    <script src="config.js?v=20260519-savedupload"></script>
+    <script>
+        (function () {
+            const appConfig = window.RED_MAP_CONFIG || {};
+            const deployment = appConfig.deployment || {};
+            const qrApiTemplate = appConfig.qrApiTemplate || "https://api.qrserver.com/v1/create-qr-code/?size=280x280&data={url}";
+
+            const posterHint = document.getElementById("posterDeployHint");
+            const qrImage = document.getElementById("qrImage");
+            const qrPlaceholder = document.getElementById("qrPlaceholder");
+            const enterButton = document.getElementById("enterMapButton");
+            const posterUrl = document.getElementById("posterUrl");
+            const copyLinkButton = document.getElementById("copyLinkButton");
+            const qrCaption = document.querySelector(".qr-caption");
+            const qrNote = document.querySelector(".qr-note");
+
+            const baseUrl = deployment.forceBaseUrl
+                ? deployment.forceBaseUrl.replace(/\/+$/, "") + "/"
+                : new URL("./", window.location.href).toString();
+            const mapUrl = new URL("map.html", baseUrl).toString();
+            const isLocalPreview = window.location.protocol === "file:";
+            const canSharePublicUrl = Boolean(deployment.forceBaseUrl) || !isLocalPreview;
+
+            enterButton.href = canSharePublicUrl ? mapUrl : "map.html";
+
+            if (canSharePublicUrl) {
+                posterUrl.hidden = false;
+                posterUrl.textContent = mapUrl;
+                copyLinkButton.hidden = false;
+                qrImage.hidden = false;
+                qrPlaceholder.hidden = true;
+                qrImage.src = qrApiTemplate.replace("{url}", encodeURIComponent(mapUrl));
+                qrCaption.textContent = "扫码进入活动地图";
+                qrNote.textContent = "可通过下方链接直接访问地图页面。";
+                posterHint.textContent = "扫码进入地图页面。";
+            } else {
+                posterUrl.hidden = true;
+                posterUrl.textContent = "";
+                copyLinkButton.hidden = true;
+                qrImage.hidden = true;
+                qrImage.removeAttribute("src");
+                qrPlaceholder.hidden = false;
+                qrCaption.textContent = "部署后可扫码访问";
+                qrNote.textContent = "当前为本地预览，部署到公网地址后会自动生成访问链接。";
+                posterHint.textContent = "当前为本地预览，请部署后生成扫码链接。";
+            }
+
+            qrImage.addEventListener("error", function () {
+                qrImage.alt = "二维码生成失败，请复制下方链接";
+            });
+
+            copyLinkButton.addEventListener("click", async function () {
+                try {
+                    await navigator.clipboard.writeText(mapUrl);
+                    copyLinkButton.textContent = "链接已复制";
+                    window.setTimeout(function () {
+                        copyLinkButton.textContent = "复制访问链接";
+                    }, 2200);
+                } catch (error) {
+                    window.prompt("复制活动链接", mapUrl);
+                }
+            });
+        }());
+    </script>
+</body>
+</html>
