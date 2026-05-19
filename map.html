@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>乌鲁木齐红色地图打卡</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="map-page">
+    <main class="app-shell">
+        <header class="app-header">
+            <a class="ghost-link" href="index.html">封面</a>
+            <div class="header-copy">
+                <p class="header-kicker">主题团日活动</p>
+                <h1 id="projectTitle">乌鲁木齐红色地图打卡</h1>
+                <p id="projectSubtitle">红色场馆 / 校史馆 / 纪念馆 / 博物馆 检索与记录</p>
+            </div>
+            <button id="locateButton" class="icon-chip" type="button">定位</button>
+        </header>
+
+        <section class="search-strip">
+            <label class="search-field" for="searchInput">
+                <span>搜索地点</span>
+                <input id="searchInput" type="search" placeholder="输入场馆名称、地址或关键词">
+            </label>
+            <div class="search-meta">
+                <p id="distanceHint">支持输入场馆名称或地址检索</p>
+                <p id="siteCount">加载中...</p>
+            </div>
+        </section>
+
+        <section class="map-stage">
+            <div id="realMap" class="real-map"></div>
+            <div id="mapFallback" class="map-fallback is-hidden" aria-hidden="true">
+                <div class="map-fallback-grid"></div>
+                <div class="map-fallback-glow map-fallback-glow-a"></div>
+                <div class="map-fallback-glow map-fallback-glow-b"></div>
+                <div class="map-fallback-orbit map-fallback-orbit-a"></div>
+                <div class="map-fallback-orbit map-fallback-orbit-b"></div>
+                <div class="map-river map-river-a"></div>
+                <div class="map-river map-river-b"></div>
+                <div class="map-road map-road-a"></div>
+                <div class="map-road map-road-b"></div>
+                <div class="map-road map-road-c"></div>
+                <div class="map-road map-road-d"></div>
+                <div class="map-fallback-node map-fallback-node-a"></div>
+                <div class="map-fallback-node map-fallback-node-b"></div>
+                <div class="map-fallback-node map-fallback-node-c"></div>
+                <div class="map-fallback-node map-fallback-node-d"></div>
+                <div class="map-fallback-tag">红色地图示意背景</div>
+            </div>
+            <div class="map-controls">
+                <button id="zoomInButton" type="button">+</button>
+                <button id="zoomOutButton" type="button">-</button>
+                <button id="resetViewButton" type="button">回</button>
+            </div>
+
+            <div id="siteCard" class="site-card is-hidden" aria-live="polite"></div>
+            <div id="toast" class="status-toast is-hidden"></div>
+        </section>
+
+        <section id="sheet" class="sheet is-open">
+            <button id="sheetToggle" class="sheet-toggle" type="button">
+                <span>请选择地区</span>
+                <strong id="sheetState">收起</strong>
+            </button>
+
+            <div class="sheet-body">
+                <div id="districtTabs" class="district-tabs"></div>
+                <div id="siteList" class="site-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="config.js?v=20260519-deletecheckin"></script>
+    <script src="data/sites.js?v=20260519-deletecheckin"></script>
+    <script src="map.js?v=20260519-deletecheckin"></script>
+</body>
+</html>
